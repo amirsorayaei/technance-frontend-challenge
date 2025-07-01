@@ -1,13 +1,13 @@
-import LivePriceCard from "../LivePriceCard";
+import Chart from "../Chart";
 import styles from "./ChartPanel.module.scss";
+import { generateBTCMockData } from "./constants";
 
 export const ChartPanel = () => {
+  const mockData = generateBTCMockData();
+
   return (
     <div className={styles.mainWrapper}>
-      <div className={styles.chartWrapper}>Chart</div>
-      <div className={styles.priceCard}>
-        <LivePriceCard price={165465} />
-      </div>
+      <Chart width={800} height={400} data={mockData} />
     </div>
   );
 };
