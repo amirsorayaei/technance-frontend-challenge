@@ -60,6 +60,23 @@ export const Chart: React.FC<ChartProps> = ({
     config: { tension: 300, friction: 30 },
   });
 
+  // Animated position for LivePriceCard
+  const animatedPosition = useSpring({
+    x:
+      data.length > 0
+        ? xScale(new Date(data[data.length - 1].timestamp)) + 15
+        : 0,
+    y: data.length > 0 ? yScale(data[data.length - 1].price) - 40 : 0,
+    config: { tension: 300, friction: 30 },
+  });
+
+  // Animated position for circle
+  const animatedCircle = useSpring({
+    x: data.length > 0 ? xScale(new Date(data[data.length - 1].timestamp)) : 0,
+    y: data.length > 0 ? yScale(data[data.length - 1].price) : 0,
+    config: { tension: 300, friction: 30 },
+  });
+
   return (
     <svg
       ref={svgRef}
@@ -132,9 +149,9 @@ export const Chart: React.FC<ChartProps> = ({
         {/* Current price indicator */}
         {data.length > 0 && (
           <>
-            <circle
-              cx={xScale(new Date(data[data.length - 1].timestamp))}
-              cy={yScale(data[data.length - 1].price)}
+            <animated.circle
+              cx={animatedCircle.x}
+              cy={animatedCircle.y}
               r={4}
               fill="#ffd700"
               stroke="#fff"
@@ -142,15 +159,15 @@ export const Chart: React.FC<ChartProps> = ({
             />
 
             {/* LivePriceCard positioned at current price point */}
-            <foreignObject
-              x={xScale(new Date(data[data.length - 1].timestamp)) + 10}
-              y={yScale(data[data.length - 1].price) - 30}
+            <animated.foreignObject
+              x={animatedPosition.x}
+              y={animatedPosition.y}
               width={200}
               height={80}
               className={styles.priceCard}
             >
               <LivePriceCard price={data[data.length - 1].price} />
-            </foreignObject>
+            </animated.foreignObject>
           </>
         )}
       </g>
