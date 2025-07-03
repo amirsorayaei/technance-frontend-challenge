@@ -21,7 +21,7 @@ export const createChartScales = (
   const xScale = d3
     .scaleTime()
     .domain(d3.extent(data, (d) => new Date(d.timestamp)) as [Date, Date])
-    .range([0, innerWidth]);
+    .range([0, innerWidth * 0.7]);
 
   const yScale = d3
     .scaleLinear()
@@ -44,5 +44,5 @@ export const createLineGenerator = (
 };
 
 export const generateYAxisTicks = (yScale: d3.ScaleLinear<number, number>) => {
-  return yScale.ticks(5);
+  return yScale.ticks(6);
 };

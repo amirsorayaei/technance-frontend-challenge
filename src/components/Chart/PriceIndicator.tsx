@@ -10,30 +10,33 @@ import styles from "./Chart.module.scss";
 
 interface PriceIndicatorProps {
   data: DataPoint[];
-  xScale: ChartScales["xScale"];
   yScale: ChartScales["yScale"];
+  innerWidth: number;
 }
 
 export const PriceIndicator: React.FC<PriceIndicatorProps> = ({
   data,
-  xScale,
   yScale,
+  innerWidth,
 }) => {
   const currentPoint = data[data.length - 1] || {
     timestamp: Date.now(),
     price: 0,
   };
 
+  // Position the circle in the middle of the chart
+  const centerX = innerWidth * 0.7;
+
   // Animated position for LivePriceCard
   const animatedPosition = useSpring({
-    x: xScale(new Date(currentPoint.timestamp)) + PRICE_CARD_DIMENSIONS.offsetX,
+    x: centerX + PRICE_CARD_DIMENSIONS.offsetX,
     y: yScale(currentPoint.price) - PRICE_CARD_DIMENSIONS.offsetY,
     config: CHART_ANIMATION_CONFIG,
   });
 
   // Animated position for circle
   const animatedCircle = useSpring({
-    x: xScale(new Date(currentPoint.timestamp)),
+    x: centerX,
     y: yScale(currentPoint.price),
     config: CHART_ANIMATION_CONFIG,
   });
