@@ -5,7 +5,7 @@ const App = () => {
   return (
     <div className={styles.app}>
       <header>
-        <h1>DeTrade Chart Panel</h1>
+        <h1>Technance - Live Chart Panel</h1>
         <p>Interactive Bitcoin Price Chart with Live Data</p>
       </header>
       <main>
