@@ -3,8 +3,8 @@ import { animated, useSpring } from "react-spring";
 import type { ChartProps } from "../../types/chart";
 import {
   DEFAULT_CHART_MARGIN,
-  CHART_ANIMATION_CONFIG,
   CHART_STYLES,
+  CHART_ANIMATION_CONFIG,
 } from "../../constants/chart";
 import {
   calculateChartDimensions,
@@ -81,7 +81,7 @@ export const Chart: React.FC<ChartProps> = ({
         />
 
         {/* Current price indicator */}
-        <PriceIndicator data={data} xScale={xScale} yScale={yScale} />
+        <PriceIndicator data={data} yScale={yScale} innerWidth={innerWidth} />
       </g>
     </svg>
   );
