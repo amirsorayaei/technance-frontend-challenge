@@ -21,7 +21,7 @@ export const createChartScales = (
   const xScale = d3
     .scaleTime()
     .domain(d3.extent(data, (d) => new Date(d.timestamp)) as [Date, Date])
-    .range([0, innerWidth * 0.7]);
+    .range([0, innerWidth * 0.65]);
 
   const yScale = d3
     .scaleLinear()

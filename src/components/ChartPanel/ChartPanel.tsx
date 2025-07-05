@@ -21,7 +21,7 @@ export const ChartPanel = () => {
             />
             <span>{isConnected ? "Live Data" : "Disconnected"}</span>
           </div>
-          <Chart width={800} height={400} data={data} />
+          <Chart width={900} height={400} data={data} />
         </>
       )}
     </div>

@@ -2,9 +2,9 @@ import type { ChartMargin } from "../types/chart";
 
 export const DEFAULT_CHART_MARGIN: ChartMargin = {
   top: 20,
-  right: 30,
-  bottom: 30,
-  left: 60,
+  right: 70,
+  bottom: 20,
+  left: 0,
 };
 
 export const CHART_ANIMATION_CONFIG = {
