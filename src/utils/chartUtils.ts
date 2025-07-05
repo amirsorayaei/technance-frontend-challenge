@@ -23,9 +23,18 @@ export const createChartScales = (
     .domain(d3.extent(data, (d) => new Date(d.timestamp)) as [Date, Date])
     .range([0, innerWidth * 0.65]);
 
+  // Calculate price range with buffers for potential price fluctuations
+  const prices = data.map((d) => d.price);
+  const minPrice = Math.min(...prices);
+  const maxPrice = Math.max(...prices);
+  const priceRange = maxPrice - minPrice;
+
+  // Add small buffers: 2% of the range on each side to account for price fluctuations
+  const buffer = priceRange * 0.02;
+
   const yScale = d3
     .scaleLinear()
-    .domain(d3.extent(data, (d) => d.price) as [number, number])
+    .domain([minPrice - buffer, maxPrice + buffer])
     .range([innerHeight, 0])
     .nice();
 
