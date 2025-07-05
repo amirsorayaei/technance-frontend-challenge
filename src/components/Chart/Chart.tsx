@@ -68,7 +68,12 @@ export const Chart: React.FC<ChartProps> = ({
         />
 
         {/* Y-axis */}
-        <ChartAxis yScale={yScale} innerHeight={innerHeight} yTicks={yTicks} />
+        <ChartAxis
+          yScale={yScale}
+          innerHeight={innerHeight}
+          innerWidth={innerWidth}
+          yTicks={yTicks}
+        />
 
         {/* Animated line */}
         <animated.path

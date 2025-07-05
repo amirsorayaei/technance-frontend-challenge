@@ -25,7 +25,7 @@ export const PriceIndicator: React.FC<PriceIndicatorProps> = ({
   };
 
   // Position the circle in the middle of the chart
-  const centerX = innerWidth * 0.7;
+  const centerX = innerWidth * 0.65;
 
   // Animated position for LivePriceCard
   const animatedPosition = useSpring({
