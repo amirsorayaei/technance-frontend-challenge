@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { animated, useSpring } from "react-spring";
 import type { ChartProps } from "../../types/chart";
 import {
@@ -24,6 +24,7 @@ export const Chart: React.FC<ChartProps> = ({
   margin = DEFAULT_CHART_MARGIN,
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
+  const [showLineChart, setShowLineChart] = useState<boolean>(false);
 
   // Calculate dimensions
   const { innerWidth, innerHeight } = calculateChartDimensions(
@@ -49,6 +50,10 @@ export const Chart: React.FC<ChartProps> = ({
     d: linePath,
     config: CHART_ANIMATION_CONFIG,
   });
+
+  useEffect(() => {
+    if (linePath) setShowLineChart(true);
+  }, [linePath]);
 
   return (
     <svg
@@ -76,14 +81,16 @@ export const Chart: React.FC<ChartProps> = ({
         />
 
         {/* Animated line */}
-        <animated.path
-          d={animatedPath.d}
-          fill="none"
-          stroke={CHART_STYLES.lineColor}
-          strokeWidth={CHART_STYLES.lineWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        {showLineChart && (
+          <animated.path
+            d={animatedPath.d}
+            fill="none"
+            stroke={CHART_STYLES.lineColor}
+            strokeWidth={CHART_STYLES.lineWidth}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        )}
 
         {/* Current price indicator */}
         <PriceIndicator data={data} yScale={yScale} innerWidth={innerWidth} />
