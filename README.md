@@ -2,6 +2,12 @@
 
 A modern, interactive Bitcoin price chart application that displays real-time price data from Binance WebSocket API. Built with React, TypeScript, and D3.js for smooth animations and responsive design.
 
+## 🌐 Live Demo
+
+**Try it out now:** [https://amirsorayaei.github.io/technance-frontend-challenge/](https://amirsorayaei.github.io/technance-frontend-challenge/)
+
+Experience the real-time Bitcoin price chart with live data from Binance WebSocket API.
+
 ## 🚀 Features
 
 - **Real-time Bitcoin Price Data**: Live price updates via Binance WebSocket API
