@@ -3,7 +3,7 @@ import styles from "./ChartPanel.module.scss";
 import { useLiveData } from "../../hooks/useLiveData";
 
 export const ChartPanel = () => {
-  const { data, isConnected, isLoading } = useLiveData(50);
+  const { data, isConnected, isLoading } = useLiveData();
 
   return (
     <div className={styles.mainWrapper}>

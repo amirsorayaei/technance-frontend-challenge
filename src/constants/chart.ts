@@ -12,6 +12,11 @@ export const CHART_ANIMATION_CONFIG = {
   friction: 30,
 };
 
+export const REALTIME_ANIMATION_CONFIG = {
+  tension: 300,
+  friction: 30,
+};
+
 export const CHART_STYLES = {
   lineColor: "#ffd700",
   lineWidth: 2,
