@@ -18,19 +18,39 @@ export const createChartScales = (
   innerWidth: number,
   innerHeight: number
 ): ChartScales => {
+  // Handle edge cases with insufficient data
+  if (data.length < 2) {
+    // Return default scales for insufficient data
+    const now = new Date();
+    const defaultPrice = 45000; // Default BTC price
+
+    const xScale = d3
+      .scaleTime()
+      .domain([now, now])
+      .range([0, innerWidth * 0.65]);
+
+    const yScale = d3
+      .scaleLinear()
+      .domain([defaultPrice - 100, defaultPrice + 100])
+      .range([innerHeight, 0])
+      .nice();
+
+    return { xScale, yScale };
+  }
+
   const xScale = d3
     .scaleTime()
     .domain(d3.extent(data, (d) => new Date(d.timestamp)) as [Date, Date])
     .range([0, innerWidth * 0.65]);
 
-  // Calculate price range with buffers for potential price fluctuations
+  // Calculate price range with smaller buffers for more responsive updates
   const prices = data.map((d) => d.price);
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
   const priceRange = maxPrice - minPrice;
 
-  // Add small buffers: 2% of the range on each side to account for price fluctuations
-  const buffer = priceRange * 0.02;
+  // Reduce buffer size for more responsive updates: 1% instead of 2%
+  const buffer = priceRange * 0.01;
 
   const yScale = d3
     .scaleLinear()

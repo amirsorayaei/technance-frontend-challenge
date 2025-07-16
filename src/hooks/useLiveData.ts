@@ -3,7 +3,7 @@ import { binanceWebSocket } from "../services/binanceWebSocket";
 import type { PriceDataPoint } from "../services/binanceWebSocket";
 import type { DataPoint } from "../types/chart";
 
-export const useLiveData = (maxDataPoints: number = 25) => {
+export const useLiveData = (maxDataPoints: number = Infinity) => {
   const [data, setData] = useState<DataPoint[]>([]);
   const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -16,9 +16,10 @@ export const useLiveData = (maxDataPoints: number = 25) => {
           price: priceData.price,
         };
 
+        // Add new data point immediately
         const updatedData = [...prevData, newDataPoint];
 
-        // Keep only the last maxDataPoints
+        // Keep only the last maxDataPoints for performance
         if (updatedData.length > maxDataPoints) {
           return updatedData.slice(-maxDataPoints);
         }
@@ -40,7 +41,7 @@ export const useLiveData = (maxDataPoints: number = 25) => {
           setIsConnected(true);
           setIsLoading(false);
 
-          // Subscribe to price updates
+          // Subscribe to price updates immediately
           binanceWebSocket.subscribeToBTCTicker(handlePriceUpdate);
         }
       } catch (error) {
