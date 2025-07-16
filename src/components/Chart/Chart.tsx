@@ -43,8 +43,6 @@ export const Chart: React.FC<ChartProps> = memo(
     // Generate Y-axis ticks
     const yTicks = generateYAxisTicks(yScale);
 
-    console.log(linePath);
-
     // Animated line path with drawing animation
     const springProps = useSpring({
       to: {
@@ -56,7 +54,7 @@ export const Chart: React.FC<ChartProps> = memo(
       },
       config: {
         ...REALTIME_ANIMATION_CONFIG,
-        duration: isDrawing ? 800 : 300, // Slower for drawing, faster for updates
+        duration: isDrawing ? 1000 : 300, // Slower for drawing, faster for updates
       },
       immediate: !showLineChart,
     });

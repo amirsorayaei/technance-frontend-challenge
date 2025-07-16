@@ -35,7 +35,7 @@ export const PriceIndicator: React.FC<PriceIndicatorProps> = ({
     y: yScale(currentPoint.price) - PRICE_CARD_DIMENSIONS.offsetY,
     config: {
       ...REALTIME_ANIMATION_CONFIG,
-      duration: isDrawing ? 800 : 300, // Slower for drawing, faster for updates
+      duration: isDrawing ? 1000 : 300, // Slower for drawing, faster for updates
     },
   });
 
@@ -45,7 +45,7 @@ export const PriceIndicator: React.FC<PriceIndicatorProps> = ({
     y: yScale(currentPoint.price),
     config: {
       ...REALTIME_ANIMATION_CONFIG,
-      duration: isDrawing ? 800 : 300, // Slower for drawing, faster for updates
+      duration: isDrawing ? 1000 : 300, // Slower for drawing, faster for updates
     },
   });
 
