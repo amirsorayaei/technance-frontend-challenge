@@ -12,12 +12,14 @@ interface PriceIndicatorProps {
   data: DataPoint[];
   yScale: ChartScales["yScale"];
   innerWidth: number;
+  isDrawing: boolean;
 }
 
 export const PriceIndicator: React.FC<PriceIndicatorProps> = ({
   data,
   yScale,
   innerWidth,
+  isDrawing,
 }) => {
   const currentPoint = data[data.length - 1] || {
     timestamp: Date.now(),
@@ -31,14 +33,20 @@ export const PriceIndicator: React.FC<PriceIndicatorProps> = ({
   const animatedPosition = useSpring({
     x: centerX + PRICE_CARD_DIMENSIONS.offsetX,
     y: yScale(currentPoint.price) - PRICE_CARD_DIMENSIONS.offsetY,
-    config: REALTIME_ANIMATION_CONFIG,
+    config: {
+      ...REALTIME_ANIMATION_CONFIG,
+      duration: isDrawing ? 800 : 300, // Slower for drawing, faster for updates
+    },
   });
 
   // Animated position for circle
   const animatedCircle = useSpring({
     x: centerX,
     y: yScale(currentPoint.price),
-    config: REALTIME_ANIMATION_CONFIG,
+    config: {
+      ...REALTIME_ANIMATION_CONFIG,
+      duration: isDrawing ? 800 : 300, // Slower for drawing, faster for updates
+    },
   });
 
   if (data.length === 0) return null;

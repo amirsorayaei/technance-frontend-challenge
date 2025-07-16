@@ -137,7 +137,12 @@ export const Chart: React.FC<ChartProps> = memo(
           )}
 
           {/* Current price indicator */}
-          <PriceIndicator data={data} yScale={yScale} innerWidth={innerWidth} />
+          <PriceIndicator
+            data={data}
+            yScale={yScale}
+            innerWidth={innerWidth}
+            isDrawing={isDrawing}
+          />
         </g>
       </svg>
     );
